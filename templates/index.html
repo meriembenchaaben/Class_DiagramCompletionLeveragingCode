@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Concepts prediction</title>
+    <style>
+        .message {
+            padding: 10px;
+            margin: 5px;
+            background-color: #f3f3f3
+        }
+        nav a {
+            color: #d64161;
+            font-size: 3em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+ <div class="content">
+        {% block title %}
+        <h1>Concepts prediction</h1>
+        {% endblock %}
+
+{% block content %}
+    <form form action = "http://localhost:5000/design"   method = "post">
+        <label for="title">Concepts</label>
+
+        <br>
+        <textarea type="text" name="Concepts"
+               placeholder="Start designing and introduce concpets"
+               rows="3"
+                cols="100"
+               value="{{ request.form['input'] }}">
+
+        </textarea>
+        <br>
+
+
+        <button type="submit">Submit</button>
+    </form>
+    {% if selection %}
+
+        <form  method="POST" action="{{ url_for('submitselect') }}">
+
+        Confirm concepts
+            <select class="form-control"  name="selectedConcept">
+            {% for c in selection %}
+            <OPTION value={{c}} >{{c}}</option>
+            {% endfor %}
+            <OPTION value={{no}} > all of the suggestions are not relative</option>
+            </select>
+        <button type="submit">Approve concepts!</button>
+        </form>
+    {% endif %}
+
+ {% endblock %}
+    </div>
+
+    <form method="post" action={{ url_for('cleanDesign') }}>
+        <input type="submit" value="Clear" name="Clear"/>
+
+    </form>
+    <form method="post" action={{ url_for('generate') }}>
+        <input type="submit" value="generate" name="generate"/>
+
+    </form>
+   </form>
+
+    {% if approved %}
+         <form  method="POST" action="{{ url_for('predictTypeAssociation') }}">
+
+                predict type of association of the following concepts
+                    <select class="form-control"  name="selectedConceptForPred">
+                    {% for i in selection %}
+                        <OPTION value={{i}} >{{i}}</option>
+                    {% endfor %}
+
+                    </select>
+                <button type="submit">Predict</button>
+        </form>
+
+
+    {% endif %}
+
+{% if approved %}
+    Your design:
+            {% for i in approved %}
+                        <p >{{i}}</p>
+            {% endfor %}
+            <p>{{ approved }}</p>
+{% endif %}
+
+{% if prediction %}
+    The relation  between these two concepts {{ conceptsPredicted }} could be :
+            <p> ( {{ prediction }} ) </p>
+{% endif %}
+</body>
+</html>
