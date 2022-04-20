@@ -12,3 +12,7 @@ The link for the part of data extraction is the following https://github.com/mer
 
 process: 
 ![process](pipeline.png)
+
+
+https://user-images.githubusercontent.com/36207851/164337208-e35eaf60-883b-4e2c-bd33-b4635752b56c.mp4
+
