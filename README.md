@@ -10,7 +10,10 @@ We now understand that some patterns should be respected while generating the co
 Note that we also extracted data that suits the best our requirements. we had to define exactly our needs and perform some MDE transformations.
 The link for the part of data extraction is the following https://github.com/meriembenchaaben/eclipse-RE-java-to-Ecore-to-csv
 
-process: 
+Approach: 
+![approach](approach.jpg)
+
+Implemented features: 
 ![process](pipeline.png)
 
 
